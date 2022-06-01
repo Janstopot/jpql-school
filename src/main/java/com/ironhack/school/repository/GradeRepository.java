@@ -15,20 +15,24 @@ public interface GradeRepository extends JpaRepository<Grade, Integer> {
     public Grade findById(int id);
     public List<Grade> findAllByStudentNameContains(String contain);
 
+
     @Query(value = "SELECT sectionId, AVG(score) from Grade " +
             "GROUP BY sectionId ORDER BY AVG(score) ASC")
     public List<Object[]> findAverageScoreBySection();
 
-    @Query(value = "SELECT sectionId, AVG(score) FROM Grade group by sectionId" +
-            "having COUNT(*) > ?1 order by avg(score) asc ")
-    List<Object[]> findAverageScoreBySectionMin(int minParticipant);
 
     @Query(value = "SELECT sectionId, AVG(score) FROM Grade group by sectionId" +
-            "having COUNT(*) > :minParticipant order by avg(score) asc ")
-    List<Object[]> findAverageScoreBySectionMin2(int minParticipant);
+            " HAVING COUNT(sectionId) > ?1 order by avg(score) asc")
+    List<Object[]> findAverageScoreBySectionMin(long minParticipant);
+
+
+    @Query(value = "SELECT sectionId, AVG(score) FROM Grade group by sectionId " +
+            "HAVING COUNT(sectionId) > :minParticipant order by avg(score) asc")
+    List<Object[]> findAverageScoreBySectionMin2(long minParticipant);
+
+
 
     /*
-
     Section | AVERAGE SCORE
     [
     [Section 1, 9.5],
