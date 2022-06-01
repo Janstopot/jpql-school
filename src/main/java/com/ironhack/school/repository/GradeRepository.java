@@ -19,6 +19,14 @@ public interface GradeRepository extends JpaRepository<Grade, Integer> {
             "GROUP BY sectionId ORDER BY AVG(score) ASC")
     public List<Object[]> findAverageScoreBySection();
 
+    @Query(value = "SELECT sectionId, AVG(score) FROM Grade group by sectionId" +
+            "having COUNT(*) > ?1 order by avg(score) asc ")
+    List<Object[]> findAverageScoreBySectionMin(int minParticipant);
+
+    @Query(value = "SELECT sectionId, AVG(score) FROM Grade group by sectionId" +
+            "having COUNT(*) > :minParticipant order by avg(score) asc ")
+    List<Object[]> findAverageScoreBySectionMin2(int minParticipant);
+
     /*
 
     Section | AVERAGE SCORE

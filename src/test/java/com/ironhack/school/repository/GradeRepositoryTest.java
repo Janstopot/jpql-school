@@ -75,9 +75,8 @@ class GradeRepositoryTest {
 
     @Test
     void findAverageScoreBySection_ValidData_SectionAndAVG() {
+
         List<Object[]> result = gradeRepository.findAverageScoreBySection();
-
-
 
         assertEquals(3, result.size());
         assertEquals(55.5, result.get(0)[1]);
