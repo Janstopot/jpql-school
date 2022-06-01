@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
         @Id
         private String id;
-
         private String courseCode;
         private Short roomNum;
         private String instructor;

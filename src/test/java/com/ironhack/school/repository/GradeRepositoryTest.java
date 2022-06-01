@@ -36,6 +36,7 @@ class GradeRepositoryTest {
                 new Course("CS101", "Intro to java"),
                 new Course("CS103", "Databases")
         ));
+/*
 
         sections = sectionRepository.saveAll(List.of(
                 new Section("CS101-A", "CS101", (short) 1802, "Balderez"),
@@ -43,6 +44,7 @@ class GradeRepositoryTest {
                 new Section("CS103-A", "CS103", (short) 1200, "Rojas"),
                 new Section("CS103-B", "CS103", (short) 1208, "Tonno")
         ));
+ */
 
 
 
@@ -61,7 +63,7 @@ class GradeRepositoryTest {
 
 
 
-
+/*
     @AfterEach
     void tearDown() {
         courseRepository.deleteAll();
@@ -70,14 +72,13 @@ class GradeRepositoryTest {
     }
 
 
-
+ */
 
 
     @Test
     void findAverageScoreBySection_ValidData_SectionAndAVG() {
+
         List<Object[]> result = gradeRepository.findAverageScoreBySection();
-
-
 
         assertEquals(3, result.size());
         assertEquals(55.5, result.get(0)[1]);
@@ -85,6 +86,23 @@ class GradeRepositoryTest {
 
 
     }
+
+    @Test
+    void findAverageScoreBySectionCount_ValidData_SectionAndAVG() {
+        List<Object[]> result = gradeRepository.findAverageScoreBySectionMin(2);
+
+        assertEquals(1, result.size());
+        assertEquals("CS101-A", result.get(0)[0]);
+        assertEquals(91.5, result.get(0)[1]);
+
+        result = gradeRepository.findAverageScoreBySectionMin(4);
+        assertEquals(0, result.size());
+
+
+
+
+    }
+
 
 
 }
